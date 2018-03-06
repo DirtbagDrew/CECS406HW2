@@ -1,12 +1,13 @@
 import numpy as np 
 from helper import *
+import math
 '''
 Homework2: logistic regression classifier
 '''
 
 
 def logistic_regression(data, label, max_iter, learning_rate):
-	'''
+    '''
 	The logistic regression classifier function.
 
 	Args:
@@ -19,8 +20,18 @@ def logistic_regression(data, label, max_iter, learning_rate):
 	
 	Returns:
 		w: the seperater with shape (3, 1). You must initilize it with w = np.zeros((d,1))
-	'''
-	pass
+	''' 
+    
+    w = np.zeros((3,1))
+    g=0
+    n, _ = data.shape
+    for i in range (max_iter):
+        g=0
+        for j in range(n):
+            g=g+(data[j][2]*data[j][3])/(1+math.exp(data[j][3]*np.transpose(w)*data[j][3]))
+        g=g*(-1/n)
+        v=-g
+        w=w+learning_rate*v
 
 
 def thirdorder(data):
