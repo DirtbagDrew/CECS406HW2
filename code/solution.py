@@ -23,8 +23,8 @@ def logistic_regression(data, label, max_iter, learning_rate):
 	''' 
     feature_count=data.shape[1]
     w = np.zeros(feature_count)
-    g=0
     n, _ = data.shape
+    g=0
     for i in range (max_iter):
         for j in range(n):
             W=np.transpose(w)
@@ -32,7 +32,7 @@ def logistic_regression(data, label, max_iter, learning_rate):
         g=g*(-1/n)
         v=-g
         w=w+learning_rate*v
-        return w
+    return w
     
 
 
@@ -51,7 +51,7 @@ def thirdorder(data):
 		The first dimension represents total samples (training: 1561; testing: 424) 
 		and the second dimesion represents total features.
 	'''
-	pass
+	print(data[0][2])
 
 
 def accuracy(x, y, w): #x is data y is w
@@ -75,7 +75,11 @@ def accuracy(x, y, w): #x is data y is w
     for i in range(n):
         sgmd=1/(1+np.exp(-1*y[i]*np.dot(w,x[i])))
         if sgmd >threshold:
-            numCorr = numCorr + 1
+            cls=1
+        else:
+            cls=-1
+        if cls==y[i]:
+            numCorr=numCorr+1
     accuracy=numCorr/n
     return accuracy
     
