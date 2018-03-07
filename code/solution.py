@@ -21,17 +21,19 @@ def logistic_regression(data, label, max_iter, learning_rate):
 	Returns:
 		w: the seperater with shape (3, 1). You must initilize it with w = np.zeros((d,1))
 	''' 
-    
-    w = np.zeros((3,1))
+    feature_count=data.shape[1]
+    w = np.zeros(feature_count)
     g=0
     n, _ = data.shape
     for i in range (max_iter):
-        g=0
         for j in range(n):
-            g=g+(data[j][2]*data[j][3])/(1+math.exp(data[j][3]*np.transpose(w)*data[j][3]))
+            W=np.transpose(w)
+            g=g+(data[j]*label[j])/(1+np.exp(label[j]*W*data[j]))
         g=g*(-1/n)
         v=-g
         w=w+learning_rate*v
+        return w
+    
 
 
 def thirdorder(data):
@@ -52,7 +54,7 @@ def thirdorder(data):
 	pass
 
 
-def accuracy(x, y, w):
+def accuracy(x, y, w): #x is data y is w
     '''
     This function is used to compute accuracy of a logsitic regression model.
     
@@ -67,6 +69,17 @@ def accuracy(x, y, w):
         accuracy: total percents of correctly classified samples. Set the threshold as 0.5,
         which means, if the predicted probability > 0.5, classify as 1; Otherwise, classify as -1.
     '''
-    pass
+    n, _ = x.shape
+    threshold=.5
+    numCorr=0
+    for i in range(n):
+        sgmd=1/(1+np.exp(-1*y[i]*np.dot(w,x[i])))
+        if sgmd >threshold:
+            numCorr = numCorr + 1
+    accuracy=numCorr/n
+    return accuracy
+    
+    
+    
 
 

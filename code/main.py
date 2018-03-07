@@ -24,12 +24,12 @@ def test_logistic_regression():
 	traindataloc,testdataloc = "../data/train.txt", "../data/test.txt"
 	train_data,train_label = load_features(traindataloc)
 	test_data, test_label = load_features(testdataloc)
-	try:
-		train_test_a_model("logistic regression", train_data, train_label, test_data, \
+	#try:
+	train_test_a_model("logistic regression", train_data, train_label, test_data, \
 							test_label, max_iter, learning_rate)
-	except:
-		print("Please finish logistic_regression() and cross_entropy_error() functions \n\
-				before you run the test_logistic_regression() function.\n")
+	#except:
+		#print("Please finish logistic_regression() and cross_entropy_error() functions \n\
+				#before you run the test_logistic_regression() function.\n")
 
 
 def test_thirdorder_logistic_regression():
