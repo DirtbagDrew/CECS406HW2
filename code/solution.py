@@ -1,6 +1,7 @@
 import numpy as np 
 from helper import *
 import math
+import pdb
 '''
 Homework2: logistic regression classifier
 '''
@@ -37,7 +38,7 @@ def logistic_regression(data, label, max_iter, learning_rate):
 
 
 def thirdorder(data):
-	'''
+    '''
 	This function is used for a 3rd order polynomial transform of the data.
 	Args:
 	data: input data with shape (:, 3) the first dimension represents 
@@ -50,9 +51,22 @@ def thirdorder(data):
 		from 3 to 10. 
 		The first dimension represents total samples (training: 1561; testing: 424) 
 		and the second dimesion represents total features.
-	'''
-	print(data[0][2])
-
+    '''
+    
+    n, _= data.shape
+    result = [[0 for x in range(10)] for y in range(n)] 
+    for i in range(n):
+        result[i][0]=1
+        result[i][1]=data[i][0]
+        result[i][2]=data[i][1]
+        result[i][3]=data[i][0]**2
+        result[i][4]=data[i][0]*data[i][1]
+        result[i][5]=data[i][1]**2
+        result[i][6]=data[i][0]**3
+        result[i][7]=(data[i][0]**2)*data[i][1]
+        result[i][8]=data[i][0]*(data[i][1]**2)
+        result[i][9]=data[i][1]**3
+    return np.array(result)        
 
 def accuracy(x, y, w): #x is data y is w
     '''

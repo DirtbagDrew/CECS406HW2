@@ -33,18 +33,18 @@ def test_logistic_regression():
 
 
 def test_thirdorder_logistic_regression():
-	max_iter = [100, 200, 500,1000]
-	learning_rate = [0.1, 0.2, 0.5]
-	traindataloc,testdataloc = "../data/train.txt", "../data/test.txt"
-	train_data,train_label = load_features(traindataloc)
-	test_data, test_label = load_features(testdataloc)
-	try:
-		new_train_data = thirdorder(train_data[:,1:3])
-		new_test_data = thirdorder(test_data[:,1:3])
-		train_test_a_model("3rd order logistic regression", new_train_data, train_label, \
-						new_test_data, test_label, max_iter, learning_rate)
-	except:
-		print("Please finish thirdorder() function before you run\n\
+    max_iter = [100, 200, 500,1000]
+    learning_rate = [0.1, 0.2, 0.5]
+    traindataloc,testdataloc = "../data/train.txt", "../data/test.txt"
+    train_data,train_label = load_features(traindataloc)
+    test_data, test_label = load_features(testdataloc)
+    try:
+        new_train_data = thirdorder(train_data[:,1:3])
+        new_test_data = thirdorder(test_data[:,1:3])
+        train_test_a_model("3rd order logistic regression", new_train_data, train_label, \
+                        new_test_data, test_label, max_iter, learning_rate)
+    except:
+        print("Please finish thirdorder() function before you run\n\
 				the test_thirdorder_logistic_regression() function.\n")
 
 
