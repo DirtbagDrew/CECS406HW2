@@ -22,18 +22,19 @@ def logistic_regression(data, label, max_iter, learning_rate):
 	Returns:
 		w: the seperater with shape (3, 1). You must initilize it with w = np.zeros((d,1))
 	''' 
+    
     feature_count=data.shape[1]
-    w = np.zeros(feature_count)
+    w = np.zeros(feature_count) # initialize the weights at time step t=0 to w(0)
     n, _ = data.shape
     g=0
-    for i in range (max_iter):
-        for j in range(n):
+    for i in range (max_iter):  # for t=0,1,2....max_iter do
+        for j in range(n):      # compute the gradient: 1/N(the sum from 1 to N(ln(1+e^(-yn*w^t*xn))))
             W=np.transpose(w)
             g=g+(data[j]*label[j])/(1+np.exp(label[j]*W*data[j]))
         g=g*(-1/n)
-        v=-g
-        w=w+learning_rate*v
-    return w
+        v=-g    #set the direction to move
+        w=w+learning_rate*v     #update the weights
+    return w    #return the final weights
     
 
 
@@ -52,7 +53,7 @@ def thirdorder(data):
 		The first dimension represents total samples (training: 1561; testing: 424) 
 		and the second dimesion represents total features.
     '''
-    
+    #third order transformation(x) = (1, x1, x2, x1^2, x1x2, x2^2, x1^3, x1^2 * x2, x1 * x2^2, x2^3) 
     n, _= data.shape
     result = [[0 for x in range(10)] for y in range(n)] 
     for i in range(n):
@@ -86,15 +87,15 @@ def accuracy(x, y, w): #x is data y is w
     n, _ = x.shape
     threshold=.5
     numCorr=0
-    for i in range(n):
-        sgmd=1/(1+np.exp(-1*y[i]*np.dot(w,x[i])))
-        if sgmd >threshold:
+    for i in range(n):  
+        sgmd=1/(1+np.exp(-1*y[i]*np.dot(w,x[i])))   #1/(1+e^(-1*yn*wt*xn))
+        if sgmd >threshold: 
             cls=1
         else:
             cls=-1
-        if cls==y[i]:
+        if cls==y[i]: # if the sigmoid classification is equal to the label at to numCorr counter
             numCorr=numCorr+1
-    accuracy=numCorr/n
+    accuracy=numCorr/n 
     return accuracy
     
     
